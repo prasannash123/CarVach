@@ -1,0 +1,10 @@
+import asyncpg
+
+async def create_pool():
+    return await asyncpg.create_pool(user="your_username", password="your_password",
+                                     database="your_database", host="your_host")
+
+async def get_connection():
+    pool = await create_pool()
+    async with pool.acquire() as connection:
+        return connection
